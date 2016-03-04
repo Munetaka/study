@@ -76,7 +76,7 @@ for c = 1:num_labels
     cost(c) = 1 / m * sum(sum(-yc .* log(a2(:,c)) - (1 .- yc) .* log(1 .- a2(:,c))));
 end
 
-J = sum(cost);
+J = sum(cost) + lambda / (2 * m) * (sum(sum(Theta1(:,2:end) .^2)) + sum(sum(Theta2(:,2:end) .^ 2)));
 
 
 
