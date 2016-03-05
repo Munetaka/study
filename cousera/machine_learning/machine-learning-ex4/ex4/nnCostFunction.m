@@ -62,33 +62,35 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
-X = [ones(size(X,1), 1) X];
+a1 = [ones(size(X,1), 1) X];
 
-a1 = sigmoid(X * Theta1');
+z2 = a1 * Theta1';
+a2 = sigmoid(z2);
+a2 = [ones(size(a2,1), 1) a2];
 
-a1 = [ones(size(a1,1), 1) a1];
-
-a2 = sigmoid(a1 * Theta2');
+z3 = a2 * Theta2';
+a3 = sigmoid(z3);
 
 cost = zeros(num_labels,1);
 for c = 1:num_labels
     yc = (y == c);
-    cost(c) = 1 / m * sum(sum(-yc .* log(a2(:,c)) - (1 .- yc) .* log(1 .- a2(:,c))));
+    cost(c) = 1 / m * sum(sum(-yc .* log(a3(:,c)) - (1 .- yc) .* log(1 .- a3(:,c))));
 end
 
 J = sum(cost) + lambda / (2 * m) * (sum(sum(Theta1(:,2:end) .^2)) + sum(sum(Theta2(:,2:end) .^ 2)));
 
 
+y_eye = eye(num_labels);
+for t = 1:m;
+    delta_3 = a3(t,:) .- y_eye(y(t),:);
+    delta_2 = delta_3 * Theta2(:,2:end) .* sigmoidGradient(z2(t,:));
 
+    Theta1_grad = Theta1_grad + delta_2' * a1(t,:);
+    Theta2_grad = Theta2_grad + delta_3' * a2(t,:);
+end
 
-
-
-
-
-
-
-
-
+Theta1_grad = 1 / m .* Theta1_grad;
+Theta2_grad = 1 / m .* Theta2_grad;
 
 % -------------------------------------------------------------
 
