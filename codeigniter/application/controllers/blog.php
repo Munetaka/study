@@ -23,6 +23,9 @@ class Blog extends CI_Controller {
 
     public function index()
     {
+
+        $this->load->model('user_model');
+
         $header_data = array(
             'title' => 'My Blog',
         );
@@ -33,6 +36,7 @@ class Blog extends CI_Controller {
                 'test2',
                 'test3',
             ),
+            'user_id' => $this->user_model->userId(),
         );
         $this->load->view('common/header', $header_data);
         $this->load->view('blogview', $data);
