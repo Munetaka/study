@@ -23,13 +23,14 @@ class Blog extends CI_Controller {
 
     public function index()
     {
-        $data = array(
+        $header_data = array(
             'title' => 'My Blog',
-            'header' => 'Welcome to my Blog!',
         );
-        $this->load->view('common/header', $data);
-        $this->load->view('blogview');
-        $this->load->view('common/footer', $data);
+        $header = 'Welcome to my Blog!';
+        $body = new Blog_Body($header);
+        $this->load->view('common/header', $header_data);
+        $this->load->view('blogview', $body);
+        $this->load->view('common/footer');
     }
 
     public function comments()
@@ -57,4 +58,13 @@ class Blog extends CI_Controller {
     {
         echo 'private method';
     }
+}
+
+class Blog_Body {
+
+    public function __construct($header)
+    {
+        $this->header = $header;
+    }
+
 }
