@@ -23,7 +23,7 @@ class Blog extends CI_Controller {
 
     public function index()
     {
-        echo 'hello world !';
+        $this->load->view('blogview');
     }
 
     public function comments()
@@ -43,6 +43,7 @@ class Blog extends CI_Controller {
         {
             $this->output->_write_cache($output);
         }
+        echo $output;
     }
 
     // even if this medhod define as pulbic, we can't access method if it stats underscore.
