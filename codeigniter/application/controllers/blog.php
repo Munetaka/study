@@ -4,6 +4,7 @@ class Blog extends CI_Controller {
     /*
      * override _remap()
      */
+    /*
     public function _remap($method, $params = array())
     {
         $method = 'process_'.$method;
@@ -13,18 +14,19 @@ class Blog extends CI_Controller {
         }
         show_404();
     }
+    */
 
-    public function process_index()
+    public function index()
     {
         echo 'hello world !';
     }
 
-    public function process_comments()
+    public function comments()
     {
         echo 'Look at this !';
     }
 
-    public function process_get($get1, $get2 = null)
+    public function get($get1, $get2 = null)
     {
         echo 'get1 param = ' . $get1 . "\n";
         echo 'get2 param = ' . $get2 . "\n";
@@ -36,5 +38,11 @@ class Blog extends CI_Controller {
         {
             $this->output->_write_cache($output);
         }
+    }
+
+    // even if this medhod define as pulbic, we can't access method if it stats underscore.
+    private function _test()
+    {
+        echo 'private method';
     }
 }
