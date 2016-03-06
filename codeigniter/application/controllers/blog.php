@@ -29,4 +29,12 @@ class Blog extends CI_Controller {
         echo 'get1 param = ' . $get1 . "\n";
         echo 'get2 param = ' . $get2 . "\n";
     }
+
+    public function _output($output)
+    {
+        if ($this->output->cache_expiration > 0)
+        {
+            $this->output->_write_cache($output);
+        }
+    }
 }
