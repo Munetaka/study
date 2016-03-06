@@ -1,5 +1,5 @@
 <html>
 <head>
-    <title>My Blog</title>
+    <title><?php echo $title ?></title>
 </head>
 <body>

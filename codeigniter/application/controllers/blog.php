@@ -23,9 +23,13 @@ class Blog extends CI_Controller {
 
     public function index()
     {
-        $this->load->view('common/header');
+        $data = array(
+            'title' => 'My Blog',
+            'header' => 'Welcome to my Blog!',
+        );
+        $this->load->view('common/header', $data);
         $this->load->view('blogview');
-        $this->load->view('common/footer');
+        $this->load->view('common/footer', $data);
     }
 
     public function comments()
