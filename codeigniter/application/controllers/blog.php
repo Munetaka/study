@@ -26,10 +26,16 @@ class Blog extends CI_Controller {
         $header_data = array(
             'title' => 'My Blog',
         );
-        $header = 'Welcome to my Blog!';
-        $body = new Blog_Body($header);
+        $data = array(
+            'header' => 'Welcome to my Blog!',
+            'todo_list' => array(
+                'test1',
+                'test2',
+                'test3',
+            ),
+        );
         $this->load->view('common/header', $header_data);
-        $this->load->view('blogview', $body);
+        $this->load->view('blogview', $data);
         $this->load->view('common/footer');
     }
 
@@ -60,11 +66,3 @@ class Blog extends CI_Controller {
     }
 }
 
-class Blog_Body {
-
-    public function __construct($header)
-    {
-        $this->header = $header;
-    }
-
-}
