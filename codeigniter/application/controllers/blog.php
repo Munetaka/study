@@ -1,17 +1,30 @@
 <?php
 class Blog extends CI_Controller {
 
-    public function index()
+    /*
+     * override _remap()
+     */
+    public function _remap($method, $params = array())
+    {
+        $method = 'process_'.$method;
+        if (method_exists($this, $method))
+        {
+            return call_user_func_array(array($this, $method), $params);
+        }
+        show_404();
+    }
+
+    public function process_index()
     {
         echo 'hello world !';
     }
 
-    public function comments()
+    public function process_comments()
     {
         echo 'Look at this !';
     }
 
-    public function get($get1, $get2 = null)
+    public function process_get($get1, $get2 = null)
     {
         echo 'get1 param = ' . $get1 . "\n";
         echo 'get2 param = ' . $get2 . "\n";
