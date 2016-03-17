@@ -33,11 +33,13 @@ for i = 1:length(C_vec)
         model= svmTrain(X, y, C_vec(i), @(x1, x2) gaussianKernel(x1, x2, sigma_vec(j)));
         predictions = svmPredict(model, Xval);
 
+        err(i, j) = mean(double(predictions ~= yval));
     end
 end
 
-[_ C_idx] = max(max(err, [], 2));
-[_ sigma_idx] = max(max(err));
+[_ C_idx] = min(min(err, [], 2));
+[_ sigma_idx] = min(min(err));
+
 C = C_vec(C_idx);
 sigma = sigma_vec(sigma_idx);
 
