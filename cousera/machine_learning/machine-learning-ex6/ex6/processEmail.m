@@ -98,11 +98,11 @@ while ~isempty(email_contents)
     %
 
 
+    [is_exist, idx] = ismember(str, vocabList);
 
-
-
-
-
+    if is_exist
+        word_indices = [word_indices; idx];
+    end
 
 
 
