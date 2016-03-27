@@ -21,7 +21,7 @@ S = zeros(n);
 %
 
 
-
+[U S X] = svd(1 / m * (X' * X));
 
 
 
