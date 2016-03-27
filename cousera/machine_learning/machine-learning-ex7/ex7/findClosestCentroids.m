@@ -23,9 +23,7 @@ idx = zeros(size(X,1), 1);
 
 for i = 1:length(X)
     norm = zeros(size(K, 1));
-    for ki = 1:K
-        norm(ki) = sum((X(i, :) - centroids(ki, :)) .^ 2);
-    end
+    norm = sum(((X(i, :) .- centroids) .^ 2)');
     [_ ix] = min(norm);
     idx(i) = ix;
 end
